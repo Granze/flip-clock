@@ -1,0 +1,40 @@
+:host {
+  display: block;
+}
+
+:host #clock {
+    font-size: 0;
+    font-family: Arial, Verdana, sans-serif;
+}
+
+:host #clock * {
+  font-size: 70px;
+}
+
+:host #clock > span {
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+  padding: 5px 15px;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #333;
+  background: -webkit-gradient(linear, left top, left bottom, from(#222222), color-stop(50%, #333333), color-stop(51%, #222222), to(#011111));
+  background: -webkit-linear-gradient(top, #222222 0%, #333333 50%, #222222 51%, #011111 100%);
+  background: linear-gradient(to bottom, #222222 0%,#333333 50%,#222222 51%,#011111 100%);
+}
+
+:host #clock > span:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 3px;
+  background-color: #111;
+}
+
+:host #clock > b {
+  color: #666;
+  margin-right: 10px;
+}

@@ -1,0 +1,146 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+A flip clock, timer and countdown made with Polymer
+
+##### Example
+
+    <flip-clock></flip-clock>
+
+@element flip-clock
+@blurb A flip clock, timer and countdown made with Polymer
+@status alpha
+@homepage http://Granze.github.io/flip-clock
+-->
+<polymer-element name="flip-clock" attributes="displayMode toggleButton resetButton showSeconds">
+
+  <template>
+
+    <link rel="stylesheet" href="flip-clock.css" />
+
+    <content>
+      <div id="clock">
+        <span id="hours0">{{hours[0]}}</span><span id="hours1">{{hours[1]}}</span>
+        <b>:</b>
+        <span id="minutes0">{{minutes[0]}}</span><span id="minutes1">{{minutes[1]}}</span>
+        <template if="{{showSeconds}}">
+          <b>:</b>
+          <span id="seconds0">{{seconds[0]}}</span><span id="seconds1">{{seconds[1]}}</span>
+        </template>
+      </div>
+    </content>
+
+  </template>
+
+  <script>
+
+    Polymer('flip-clock', {
+      /**
+       * The `displayMode` attribute determine which kind of clock to display.
+       *
+       * @attribute displayMode
+       * @type string
+       * @default clock
+       * @options clock, countdown, timer
+       */
+      displayMode: 'clock',
+
+      /**
+       * Display a start/stop button in countdown and timer mode.
+       *
+       * @property toggleButton
+       * @type bool
+       */
+      toggleButton: false,
+
+      /**
+       * Display a reset button in countdown and timer mode.
+       *
+       * @property toggleButton
+       * @type bool
+       */
+      resetButton: false,
+
+      /**
+       * Display a reset button in countdown and timer mode.
+       *
+       * @property toggleButton
+       * @type bool
+       */
+      showSeconds: true,
+
+      /**
+       * The `createCount` method start a clock that display the current time.
+       *
+       * @method startCount
+       * @return {Object} Returns undefined.
+       * @param {Number} startFrom Serves no purpose today.
+       */
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+      createClock: function() {
+        var now = new Date();
+        this.hours = now.getHours().toString().split('');
+        this.minutes = now.getMinutes();
+        this.seconds = now.getSeconds();
+        this.minutes = ((this.minutes < 10 ? "0" : "") + this.minutes).toString().split('');
+        this.seconds = ((this.seconds < 10 ? "0" : "") + this.seconds).toString().split('');
+        this.async(this.createClock, null, 1000);
+      },
+
+      /**
+       * The `startCount` method does no work at this time.
+       *
+       * @method startCount
+       * @return {Object} Returns undefined.
+       * @param {Number} startFrom Serves no purpose today.
+       */
+      startClock: function(startFrom) {
+
+      },
+
+      /**
+       * The `startCount` method does no work at this time.
+       *
+       * @method startCount
+       * @return {Object} Returns undefined.
+       * @param {Number} startFrom Serves no purpose today.
+       */
+      startCount: function(startFrom) {
+
+      },
+
+      /**
+       * The `stopCount` method does no work at this time.
+       *
+       * @method stopCount
+       * @return {Object} Returns undefined.
+       * @param {String} dummy Serves no purpose today.
+       */
+      stopCount: function() {
+
+      },
+
+      /**
+       * The `stopCount` method does no work at this time.
+       *
+       * @method stopCount
+       * @return {Object} Returns undefined.
+       * @param {String} dummy Serves no purpose today.
+       */
+      resetCount: function() {
+
+      },
+
+      ready: function() {
+        if(this.displayMode === 'clock') {
+          this.createClock();
+        }
+      }
+
+    });
+
+  </script>
+
+</polymer-element>
