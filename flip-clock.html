@@ -12,7 +12,7 @@ A flip clock, timer and countdown made with Polymer
 @status alpha
 @homepage http://Granze.github.io/flip-clock
 -->
-<polymer-element name="flip-clock" attributes="displayMode toggleButton resetButton showSeconds">
+<polymer-element name="flip-clock" attributes="displayMode toggleButton resetButton showSeconds startFrom">
 
   <template>
 
@@ -28,6 +28,12 @@ A flip clock, timer and countdown made with Polymer
           <span id="seconds0">{{seconds[0]}}</span><span id="seconds1">{{seconds[1]}}</span>
         </template>
       </div>
+      <template if="{{toggleButton && displayMode !== 'clock'}}">
+        <button class="toggle btn">Start/Stop</button>
+      </template>
+      <template if="{{resetButton && displayMode !== 'clock'}}">
+        <button class="reset btn">Reset</button>
+      </template>
     </content>
 
   </template>
@@ -48,7 +54,7 @@ A flip clock, timer and countdown made with Polymer
       /**
        * Display a start/stop button in countdown and timer mode.
        *
-       * @property toggleButton
+       * @attribute toggleButton
        * @type bool
        */
       toggleButton: false,
@@ -69,45 +75,49 @@ A flip clock, timer and countdown made with Polymer
        */
       showSeconds: true,
 
+      startFrom: null,
+
       /**
-       * The `createCount` method start a clock that display the current time.
+       * The `createClock` method start a clock that display the current time.
        *
-       * @method startCount
+       * @method startClock
        * @return {Object} Returns undefined.
-       * @param {Number} startFrom Serves no purpose today.
        */
-      hours: 0,
-      minutes: 0,
-      seconds: 0,
       createClock: function() {
         var now = new Date();
         this.hours = now.getHours().toString().split('');
         this.minutes = now.getMinutes();
         this.seconds = now.getSeconds();
+        this.hours = ((this.hours < 10 ? "0" : "") + this.hours).toString().split('');
         this.minutes = ((this.minutes < 10 ? "0" : "") + this.minutes).toString().split('');
         this.seconds = ((this.seconds < 10 ? "0" : "") + this.seconds).toString().split('');
         this.async(this.createClock, null, 1000);
       },
 
       /**
-       * The `startCount` method does no work at this time.
+       * The `createTimer` method start a clock that display the current time.
        *
-       * @method startCount
+       * @method startTimer
        * @return {Object} Returns undefined.
-       * @param {Number} startFrom Serves no purpose today.
        */
-      startClock: function(startFrom) {
-
+      createTimer: function() {
       },
 
+      /**
+       * The `createCountdown` method start a clock that display the current time.
+       *
+       * @method startCountdown
+       * @return {Object} Returns undefined.
+       */
+      createCountdown: function() {
+      },
       /**
        * The `startCount` method does no work at this time.
        *
        * @method startCount
        * @return {Object} Returns undefined.
-       * @param {Number} startFrom Serves no purpose today.
        */
-      startCount: function(startFrom) {
+      startCount: function() {
 
       },
 
@@ -116,7 +126,6 @@ A flip clock, timer and countdown made with Polymer
        *
        * @method stopCount
        * @return {Object} Returns undefined.
-       * @param {String} dummy Serves no purpose today.
        */
       stopCount: function() {
 
@@ -127,18 +136,27 @@ A flip clock, timer and countdown made with Polymer
        *
        * @method stopCount
        * @return {Object} Returns undefined.
-       * @param {String} dummy Serves no purpose today.
        */
       resetCount: function() {
 
       },
-
+      created: function() {
+        this.hours = [0,0];
+        this.minutes = [0,0];
+        this.seconds = [0,0];
+      },
       ready: function() {
-        if(this.displayMode === 'clock') {
-          this.createClock();
+        switch(this.displayMode) {
+          case 'timer':
+            this.createTimer();
+            break;
+          case 'countdown':
+            this.createCountdown();
+            break;
+          default:
+            this.createClock();
         }
       }
-
     });
 
   </script>

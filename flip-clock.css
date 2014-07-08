@@ -3,8 +3,9 @@
 }
 
 :host #clock {
-    font-size: 0;
-    font-family: Arial, Verdana, sans-serif;
+  font-size: 0;
+  font-family: Arial, Verdana, sans-serif;
+  font-weight: bold;
 }
 
 :host #clock * {
@@ -37,4 +38,14 @@
 :host #clock > b {
   color: #fff;
   margin-right: 10px;
+}
+
+:host .btn {
+  margin: 20px 10px 10px 10px;
+  padding: 5px 10px;
+  border: 1px solid #000;
+  border-radius: 2px;
+  cursor: pointer;
+  color: #dedede;
+  background-color: #333;
 }
