@@ -18,10 +18,10 @@
   padding: 5px 15px;
   border-radius: 4px;
   color: #fff;
+  box-shadow: 1px 1px 1px #555;
   background-color: #333;
-  background: -webkit-gradient(linear, left top, left bottom, from(#222222), color-stop(50%, #333333), color-stop(51%, #222222), to(#011111));
-  background: -webkit-linear-gradient(top, #222222 0%, #333333 50%, #222222 51%, #011111 100%);
-  background: linear-gradient(to bottom, #222222 0%,#333333 50%,#222222 51%,#011111 100%);
+  background: -webkit-linear-gradient(top, #333 0%, #444 50%, #333 51%, #222 100%);
+  background: linear-gradient(to bottom, #333 0%,#444 50%,#333 51%,#222 100%);
 }
 
 :host #clock > span:after {
@@ -35,6 +35,6 @@
 }
 
 :host #clock > b {
-  color: #666;
+  color: #fff;
   margin-right: 10px;
 }
