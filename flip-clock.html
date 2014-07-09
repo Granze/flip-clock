@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
+<script src="../moment/moment.js"></script>
 
 <!--
 A flip clock, timer and countdown made with Polymer
@@ -20,20 +21,25 @@ A flip clock, timer and countdown made with Polymer
 
     <content>
       <div id="clock">
-        <span id="hours0">{{hours[0]}}</span><span id="hours1">{{hours[1]}}</span>
+        <span id="hours0">{{time[0]}}</span><span id="hours1">{{time[1]}}</span>
         <b>:</b>
-        <span id="minutes0">{{minutes[0]}}</span><span id="minutes1">{{minutes[1]}}</span>
+        <span id="minutes0">{{time[2]}}</span><span id="minutes1">{{time[3]}}</span>
+
         <template if="{{showSeconds}}">
           <b>:</b>
-          <span id="seconds0">{{seconds[0]}}</span><span id="seconds1">{{seconds[1]}}</span>
+          <span id="seconds0">{{time[4]}}</span><span id="seconds1">{{time[5]}}</span>
         </template>
+
       </div>
+
       <template if="{{toggleButton && displayMode !== 'clock'}}">
         <button class="toggle btn">Start/Stop</button>
       </template>
+
       <template if="{{resetButton && displayMode !== 'clock'}}">
         <button class="reset btn">Reset</button>
       </template>
+
     </content>
 
   </template>
@@ -84,13 +90,7 @@ A flip clock, timer and countdown made with Polymer
        * @return {Object} Returns undefined.
        */
       createClock: function() {
-        var now = new Date();
-        this.hours = now.getHours().toString().split('');
-        this.minutes = now.getMinutes();
-        this.seconds = now.getSeconds();
-        this.hours = ((this.hours < 10 ? "0" : "") + this.hours).toString().split('');
-        this.minutes = ((this.minutes < 10 ? "0" : "") + this.minutes).toString().split('');
-        this.seconds = ((this.seconds < 10 ? "0" : "") + this.seconds).toString().split('');
+        this.time = moment().format('HHmmss');
         this.async(this.createClock, null, 1000);
       },
 
@@ -141,9 +141,7 @@ A flip clock, timer and countdown made with Polymer
 
       },
       created: function() {
-        this.hours = [0,0];
-        this.minutes = [0,0];
-        this.seconds = [0,0];
+        this.time = '000000';
       },
       ready: function() {
         switch(this.displayMode) {
