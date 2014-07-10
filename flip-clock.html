@@ -72,32 +72,55 @@ A flip clock, timer and countdown made with Polymer
       /**
        * Display a reset button in countdown and timer mode.
        *
-       * @property toggleButton
+       * @attribute resetButton
        * @type bool
        */
       resetButton: false,
 
       /**
-       * Display a reset button in countdown and timer mode.
+       * Show or hide seconds
        *
-       * @property toggleButton
+       * @attribute showSeconds
        * @type bool
        */
       showSeconds: true,
 
+      /**
+       * Set the minutes to start from for the countdown mode
+       *
+       * @attribute startFrom
+       * @type int
+       */
       startFrom: null,
 
+      /**
+       * Set the hours, minutes and seconds in the timer
+       *
+       * @attribute timer
+       * @type string
+       */
       timer: null,
 
-      auto: true,
+      /**
+       * Auto start timer and/or countdown
+       *
+       * @attribute auto
+       * @type bool
+       */
+      auto: false,
 
+      /**
+       * Track if the timer (or the countdown) is running or not
+       *
+       * @attribute isRunning
+       * @type bool
+       */
       isRunning: false,
 
       /**
        * The `createClock` method start a clock that display the current time.
        *
-       * @method startClock
-       * @return {Object} Returns undefined.
+       * @method createClock
        */
       createClock: function() {
         this.time = moment().format('HHmmss');
@@ -105,10 +128,9 @@ A flip clock, timer and countdown made with Polymer
       },
 
       /**
-       * The `createTimer` method start a clock that display the current time.
+       * The `createTimer` method create a timer
        *
-       * @method startTimer
-       * @return {Object} Returns undefined.
+       * @method createTimer
        */
       createTimer: function() {
         if(this.isRunning) {
@@ -118,10 +140,9 @@ A flip clock, timer and countdown made with Polymer
       },
 
       /**
-       * The `createCountdown` method start a clock that display the current time.
+       * The `createCountdown` method create a countdown
        *
-       * @method startCountdown
-       * @return {Object} Returns undefined.
+       * @method createCountdown
        */
       createCountdown: function() {
       },
@@ -129,7 +150,6 @@ A flip clock, timer and countdown made with Polymer
        * The `startCount` method does no work at this time.
        *
        * @method startCount
-       * @return {Object} Returns undefined.
        */
       startCount: function() {
         if(!this.timer) {
@@ -140,20 +160,18 @@ A flip clock, timer and countdown made with Polymer
       },
 
       /**
-       * The `stopCount` method does no work at this time.
+       * The `stopCount` stop the running timer or countdown
        *
        * @method stopCount
-       * @return {Object} Returns undefined.
        */
       stopCount: function() {
         this.isRunning = false;
       },
 
       /**
-       * The `stopCount` method does no work at this time.
+       * The `resetCount` reset che counter
        *
-       * @method stopCount
-       * @return {Object} Returns undefined.
+       * @method resetCount
        */
       resetCount: function() {
         this.time = '000000';
