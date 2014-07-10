@@ -91,7 +91,7 @@ A flip clock, timer and countdown made with Polymer
        * @attribute startFrom
        * @type int
        */
-      startFrom: null,
+      startFrom: 0,
 
       /**
        * Set the hours, minutes and seconds in the timer
@@ -145,6 +145,12 @@ A flip clock, timer and countdown made with Polymer
        * @method createCountdown
        */
       createCountdown: function() {
+        if(this.isRunning) {
+          if(this.time > 0) {
+            this.time = this.timer.subtract('s', 1).format('HHmmss');
+            this.async(this.createCountdown, null, 1000);
+          }
+        }
       },
       /**
        * The `startCount` method does no work at this time.
@@ -153,10 +159,12 @@ A flip clock, timer and countdown made with Polymer
        */
       startCount: function() {
         if(!this.timer) {
-          this.timer = moment().hours(0).minutes(0).seconds(0);
+          if(!this.startFrom) {
+            this.timer = moment().hours(0).minutes(0).seconds(0);
+          }
         }
         this.isRunning = true;
-        this.createTimer();
+        this.createCountdown();
       },
 
       /**
@@ -194,6 +202,9 @@ A flip clock, timer and countdown made with Polymer
             break;
           default:
             this.createClock();
+        }
+        if(this.startFrom) {
+          this.time = '00' + this.startFrom + '00';
         }
       }
     });
