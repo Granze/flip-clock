@@ -8,9 +8,19 @@
   <link rel="import" href="flip-clock.html">
   <style>
     body {
+      margin: 0;
+      padding: 0;
       font-family: Arial, Helvetica, sans-serif;
       color: #333;
       background: #ccc;
+    }
+    a {
+      color: #333;
+    }
+    a:hover {
+      color: #ccc;
+      text-decoration: none;
+      background-color: #000;
     }
     h2 {
       font-size: 34px;
@@ -18,7 +28,7 @@
     }
     .wrapper {
       width: 960px;
-      margin: 100px auto 0 auto;
+      margin: 50px auto 0 auto;
       text-align: center;
     }
     code {
@@ -30,6 +40,9 @@
       border-radius: 3px;
       padding: 2px 4px;
       color: #333;
+    }
+    .center {
+      text-align: center;
     }
   </style>
 
@@ -50,5 +63,6 @@
     <flip-clock displayMode="countdown" startFrom="20" commandButtons="true"></flip-clock>
   </div>
 
+  <p class="center"><a href="https://github.com/Granze/flip-clock">Source code on Github</a> | Follow me on twitter <a href="https://twitter.com/granze">@granze</a></p>
 </body>
 </html>
