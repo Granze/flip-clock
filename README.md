@@ -4,6 +4,10 @@ A flip clock, timer and countdown made with [Polymer](http://polymer-project.org
 
 See the [component page](http://Granze.github.io/flip-clock) for more information.
 
+## Screenshot 
+
+![Flip Clock](http://i.imgur.com/r5RBxL1.png)
+
 ## Demo
 
 > [Check it live](http://granze.github.io/flip-clock/components/flip-clock/demo.html).
