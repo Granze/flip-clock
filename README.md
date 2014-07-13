@@ -1,12 +1,20 @@
 # &lt;flip-clock&gt;
 
-A A flip clock, timer and countdown made with [Polymer](http://polymer-project.org). 
+A flip clock, timer and countdown made with [Polymer](http://polymer-project.org). 
 
 See the [component page](http://Granze.github.io/flip-clock) for more information.
 
 ## Demo
 
 > [Check it live](http://granze.github.io/flip-clock/components/flip-clock/demo.html).
+
+## Installation
+
+Install using [Bower](http://bower.io):
+
+```shell
+ bower install flip-clock
+```
 
 ## Options
 
