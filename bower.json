@@ -8,7 +8,7 @@
   "main": "flip-clock.html",
   "dependencies": {
     "moment": "~2.8.3",
-    "polymer": "~0.4.1"
+    "polymer": "~0.5.1"
   },
   "homepage": "https://github.com/Granze/flip-clock",
   "authors": [
