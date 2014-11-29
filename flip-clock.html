@@ -19,8 +19,6 @@ A flip clock, timer and countdown made with Polymer
 
     <link rel="stylesheet" href="flip-clock.css" />
 
-    <content>
-
       <div id="clock">
         <span id="hours0">{{time[0]}}</span><span id="hours1">{{time[1]}}</span>
         <b>:</b>
@@ -38,8 +36,6 @@ A flip clock, timer and countdown made with Polymer
         <button class="toggle btn" on-click="{{stopCount}}">Stop</button>
         <button class="reset btn" on-click="{{resetCount}}">Reset</button>
       </template>
-
-    </content>
 
   </template>
 
@@ -60,7 +56,7 @@ A flip clock, timer and countdown made with Polymer
        * Display start/stop and reset buttons
        *
        * @attribute commandButtons
-       * @type bool
+       * @type boolean
        */
       commandButtons: false,
 
@@ -68,7 +64,7 @@ A flip clock, timer and countdown made with Polymer
        * Show or hide seconds
        *
        * @attribute showSeconds
-       * @type bool
+       * @type boolean
        * @default true
        */
       showSeconds: true,
@@ -103,7 +99,7 @@ A flip clock, timer and countdown made with Polymer
        * Auto start timer and/or countdown
        *
        * @attribute auto
-       * @type bool
+       * @type boolean
        */
       auto: false,
 
@@ -111,7 +107,7 @@ A flip clock, timer and countdown made with Polymer
        * Track if the timer (or the countdown) is running or not
        *
        * @attribute isRunning
-       * @type bool
+       * @type boolean
        */
       isRunning: false,
 
@@ -132,7 +128,7 @@ A flip clock, timer and countdown made with Polymer
        */
       createTimer: function() {
         if(this.isRunning) {
-          this.time = this.timer.add('s', 1).format('HHmmss');
+          this.time = this.timer.add(1, 's').format('HHmmss');
           this.async(this.createTimer, null, 1000);
         }
       },
@@ -145,7 +141,7 @@ A flip clock, timer and countdown made with Polymer
       createCountdown: function() {
         if(this.isRunning) {
           if(this.time > 0) {
-            this.time = this.timer.subtract('s', 1).format('HHmmss');
+            this.time = this.timer.subtract(1, 's').format('HHmmss');
             this.async(this.createCountdown, null, 1000);
           }
         }
