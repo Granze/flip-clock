@@ -12,8 +12,9 @@ A flip clock, timer and countdown made with Polymer
 @blurb A flip clock, timer and countdown made with Polymer
 @status alpha
 @homepage http://Granze.github.io/flip-clock
+
 -->
-<polymer-element name="flip-clock" attributes="displayMode commandButtons showSeconds startFrom auto">
+<dom-module id="flip-clock">
 
   <template>
 
@@ -41,76 +42,100 @@ A flip clock, timer and countdown made with Polymer
 
   <script>
 
-    Polymer('flip-clock', {
-      /**
-       * The `displayMode` attribute determine the kind of clock to display.
-       *
-       * @attribute displayMode
-       * @type string
-       * @default clock
-       * @options clock, countdown, timer
-       */
-      displayMode: 'clock',
+    Polymer({
+      is: 'flip-clock',
 
-      /**
-       * Display start/stop and reset buttons
-       *
-       * @attribute commandButtons
-       * @type boolean
-       */
-      commandButtons: false,
+      hostAttributes: {
+        /**
+         * The `displayMode` attribute determine the kind of clock to display.
+         *
+         * @attribute displayMode
+         * @type String
+         * @default clock
+         * @options clock, countdown, timer
+         */
 
-      /**
-       * Show or hide seconds
-       *
-       * @attribute showSeconds
-       * @type boolean
-       * @default true
-       */
-      showSeconds: true,
+        /**
+         * Display start/stop and reset buttons
+         *
+         * @attribute commandButtons
+         * @type Boolean
+         * @default false
+         */
 
-      /**
-       * Set the minutes to start from for the countdown mode
-       *
-       * @attribute startFrom
-       * @type int
-       * @default null
-       */
-      startFrom: null,
+        /**
+         * Show or hide seconds
+         *
+         * @attribute showSeconds
+         * @type Boolean
+         * @default true
+         */
 
-      /**
-       * String containing the digits displayed in the flip clock
-       *
-       * @attribute time
-       * @type string
-       * @default '000000'
-       */
-      time: '000000',
+        /**
+         * Set the minutes to start from for the countdown mode
+         *
+         * @attribute startFrom
+         * @type Number
+         * @default null
+         */
 
-      /**
-       * Set the hours, minutes and seconds in the timer
-       *
-       * @attribute timer
-       * @type string
-       */
-      timer: null,
+        /**
+         * String containing the digits displayed in the flip clock
+         *
+         * @attribute time
+         * @type String
+         * @default '000000'
+         */
+        time: '000000',
 
-      /**
-       * Auto start timer and/or countdown
-       *
-       * @attribute auto
-       * @type boolean
-       */
-      auto: false,
+        /**
+         * Set the hours, minutes and seconds in the timer
+         *
+         * @attribute timer
+         * @type String
+         */
+        timer: null,
 
-      /**
-       * Track if the timer (or the countdown) is running or not
-       *
-       * @attribute isRunning
-       * @type boolean
-       */
-      isRunning: false,
+        /**
+         * Auto start timer and/or countdown
+         *
+         * @attribute auto
+         * @type Boolean
+         */
+        auto: false,
 
+        /**
+         * Track if the timer (or the countdown) is running or not
+         *
+         * @attribute isRunning
+         * @type Boolean
+         * @default false
+         */
+        isRunning: false
+      },
+
+      properties: {
+        displayMode: {
+          type: String,
+          value: 'clock'
+        },
+        commandButtons: {
+          type: Boolean,
+          value: false
+        },
+        showSeconds: {
+          type: Boolean,
+          value: true
+        },
+        startFrom: {
+          type: Number,
+          value: null
+        },
+        auto: {
+          type: Boolean,
+          value: false
+        }
+      },
       /**
        * The `createClock` method start a clock that display the current time.
        *
@@ -204,4 +229,4 @@ A flip clock, timer and countdown made with Polymer
 
   </script>
 
-</polymer-element>
+</dom-module>
