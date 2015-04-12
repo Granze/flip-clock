@@ -23,5 +23,9 @@
     "../",
     "test",
     "tests"
-  ]
+  ],
+  "resolutions": {
+    "webcomponentsjs": "^0.6.0",
+    "polymer": "~0.8.0"
+  }
 }
