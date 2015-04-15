@@ -65,13 +65,13 @@ A flip clock, timer and countdown made with Polymer
     </style>
 
     <div id="clock">
-      <span id="hours0">{{time}}</span><span id="hours1">time[1]</span>
+      <span id="hours0">{{h0}}</span><span id="hours1">{{h1}}</span>
       <b>:</b>
-      <span id="minutes0">time[2]</span><span id="minutes1">time[3]</span>
+      <span id="minutes0">{{m0}}</span><span id="minutes1">{{m1}}</span>
 
       <!--template if="showSeconds"-->
         <b>:</b>
-        <span id="seconds0">time[4]</span><span id="seconds1">time[5]</span>
+        <span id="seconds0">{{s0}}</span><span id="seconds1">{{s1}}</span>
       <!--/template-->
 
     </div>
@@ -88,19 +88,14 @@ A flip clock, timer and countdown made with Polymer
   Polymer({
     is: 'flip-clock',
 
+    hostAttributes: {
+      time: '000000',
+      timer: null
+    },
+
     properties: {
-      time: {
-        type: String,
-        value: '000000'
-      },
-      timer: {
-        type: String,
-        value: null,
-        readOnly: true
-      },
       displayMode: {
-        type: String,
-        value: 'clock'
+        type: String
       },
       commandButtons: {
         type: Boolean
@@ -123,10 +118,29 @@ A flip clock, timer and countdown made with Polymer
      * @method createClock
      */
     createClock: function() {
-      this.time = moment().format('HHmmss');
-      //this.async(this.createClock, null, 1000);
+      this.updateClock();
+      setInterval(this.updateClock.bind(this), 1000);
     },
 
+    updateClock: function() {
+      this.time = moment().format('HHmmss').split('');
+      this.h0 = this.time[0];
+      this.h1 = this.time[1];
+      this.m0 = this.time[2];
+      this.m1 = this.time[3];
+      this.s0 = this.time[4];
+      this.s1 = this.time[5];
+    },
+
+    updateTimer: function() {
+      this.time = this.timer.add(1, 's').format('HHmmss');
+      this.h0 = this.time[0];
+      this.h1 = this.time[1];
+      this.m0 = this.time[2];
+      this.m1 = this.time[3];
+      this.s0 = this.time[4];
+      this.s1 = this.time[5];
+    },
     /**
      * The `createTimer` method create a timer
      *
@@ -134,8 +148,8 @@ A flip clock, timer and countdown made with Polymer
      */
     createTimer: function() {
       if(this.isRunning) {
-        this.time = this.timer.add(1, 's').format('HHmmss');
-        this.async(this.createTimer, null, 1000);
+        this.updateTimer();
+        setInterval(this.updateTimer.bind(this), 1000);
       }
     },
 
@@ -184,10 +198,9 @@ A flip clock, timer and countdown made with Polymer
       this.time = this.startFrom ? '00' + this.startFrom + '00' : '000000';
       this.timer = null;
     },
-    created: function() {
-      this.resetCount();
-    },
+
     ready: function() {
+      console.log(this);
       switch(this.displayMode) {
         case 'timer':
           if(this.auto === true) {
