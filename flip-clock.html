@@ -65,13 +65,13 @@ A flip clock, timer and countdown made with Polymer
     </style>
 
     <div id="clock">
-      <span id="hours0">{{h0}}</span><span id="hours1">{{h1}}</span>
+      <span id="hours0">{{time.0}}</span><span id="hours1">{{time.1}}</span>
       <b>:</b>
-      <span id="minutes0">{{m0}}</span><span id="minutes1">{{m1}}</span>
+      <span id="minutes0">{{time.2}}</span><span id="minutes1">{{time.3}}</span>
 
       <!--template if="showSeconds"-->
         <b>:</b>
-        <span id="seconds0">{{s0}}</span><span id="seconds1">{{s1}}</span>
+        <span id="seconds0">{{time.4}}</span><span id="seconds1">{{time.4}}</span>
       <!--/template-->
 
     </div>
@@ -123,23 +123,11 @@ A flip clock, timer and countdown made with Polymer
     },
 
     updateClock: function() {
-      this.time = moment().format('HHmmss').split('');
-      this.h0 = this.time[0];
-      this.h1 = this.time[1];
-      this.m0 = this.time[2];
-      this.m1 = this.time[3];
-      this.s0 = this.time[4];
-      this.s1 = this.time[5];
+      this.time = moment().format('HHmmss');
     },
 
     updateTimer: function() {
       this.time = this.timer.add(1, 's').format('HHmmss');
-      this.h0 = this.time[0];
-      this.h1 = this.time[1];
-      this.m0 = this.time[2];
-      this.m1 = this.time[3];
-      this.s0 = this.time[4];
-      this.s1 = this.time[5];
     },
     /**
      * The `createTimer` method create a timer
