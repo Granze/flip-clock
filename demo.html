@@ -3,32 +3,43 @@
 <head>
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <title>flip-clock Demo</title>
-
+  <link href="//fonts.googleapis.com/css?family=RobotoDraft:300,400,500" rel="stylesheet">
   <script src="../webcomponentsjs/webcomponents-lite.min.js"></script>
   <link rel="import" href="flip-clock.html">
   <style>
     body {
       margin: 0;
       padding: 0;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: "RobotoDraft",Helvetica,Arial,sans-serif;
       color: #333;
-      background: #ccc;
+      background: #fff;
     }
     a {
-      color: #333;
+      color: #fff;
     }
     a:hover {
-      color: #ccc;
       text-decoration: none;
-      background-color: #000;
+    }
+    h1 {
+      margin: 0 auto;
+      font-weight: normal;
+    }
+    h1 span {
+      font-size: 14px;
     }
     h2 {
       font-size: 34px;
       margin: 30px 0 10px;
     }
+    header {
+      position: relative;
+      padding: 20px;
+      color: #fff;
+      background-color: #536dfe;
+    }
     .wrapper {
       width: 960px;
-      margin: 50px auto 0 auto;
+      margin: 20px auto 0 auto;
       text-align: center;
     }
     code {
@@ -41,14 +52,14 @@
       padding: 2px 4px;
       color: #333;
     }
-    .center {
-      text-align: center;
-    }
   </style>
-
 </head>
 <body>
-
+  <header>
+    <h1>&lt;flip-clock&gt;</h1>
+    <p>A flip clock, timer and countdown made with <a href="https://www.polymer-project.org">Polymer</a></p>
+  </header>
+  <a href="https://github.com/Granze/flip-clock"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
   <div class="wrapper">
     <h2>Clock</h2>
     <code>&lt;flip-clock&gt;&lt;/flip-clock&gt;</code>
@@ -62,7 +73,5 @@
     <code>&lt;flip-clock display-mode=&quot;countdown&quot; start-from=&quot;20&quot; command-buttons=&quot;true&quot;&gt;&lt;/flip-clock&gt;</code>
     <flip-clock display-mode="countdown" start-from="20" command-buttons="true"></flip-clock>
   </div>
-
-  <p class="center"><a href="https://github.com/Granze/flip-clock">Source code on Github</a> | Follow me on twitter <a href="https://twitter.com/granze">@granze</a></p>
 </body>
 </html>
