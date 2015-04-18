@@ -10,8 +10,9 @@ A flip clock, timer and countdown made with Polymer
 
 @element flip-clock
 @blurb A flip clock, timer and countdown made with Polymer
-@status alpha
+@status beta
 @homepage http://Granze.github.io/flip-clock
+@author Maurizio Mangione
 
 -->
 <dom-module id="flip-clock">
@@ -27,7 +28,7 @@ A flip clock, timer and countdown made with Polymer
     #clock * {
       font-size: 70px;
     }
-    #clock span {
+    #clock .num {
       position: relative;
       display: inline-block;
       margin-right: 10px;
@@ -39,7 +40,7 @@ A flip clock, timer and countdown made with Polymer
       background: -webkit-linear-gradient(top, #333 0%, #444 50%, #333 51%, #222 100%);
       background: linear-gradient(to bottom, #333 0%,#444 50%,#333 51%,#222 100%);
     }
-    #clock span:after {
+    #clock .num:after {
       content: '';
       position: absolute;
       left: 0;
@@ -64,24 +65,24 @@ A flip clock, timer and countdown made with Polymer
     .btn[disabled] {
       opacity: .5;
     }
-    .hide-and-seek {
+    [hidden], .buttons {
       display: none;
     }
-    .hide-and-seek[show] {
-      display: inline;
+    .buttons[visible] {
+      display: block;
     }
   </style>
   <template>
     <div id="clock">
-      <span id="hours0">{{time.0}}</span><span id="hours1">{{time.1}}</span>
-      <b>:</b><span id="minutes0">{{time.2}}</span><span id="minutes1">{{time.3}}</span>
-      <div class="hide-and-seek" show$="{{showSeconds}}">
-        <b>:</b><span id="seconds0">{{time.4}}</span><span id="seconds1">{{time.5}}</span>
-      </div>
+      <span class="num" id="hours0">[[time.0]]</span><span class="num" id="hours1">[[time.1]]</span>
+      <b>:</b><span class="num" id="minutes0">[[time.2]]</span><span class="num" id="minutes1">[[time.3]]</span>
+      <span hidden$="[[hideSeconds]]">
+        <b>:</b><span class="num" id="seconds0">[[time.4]]</span><span class="num" id="seconds1">[[time.5]]</span>
+      </span>
 
     </div>
-    <div class="hide-and-seek" show$="{{commandButtons}}">
-      <button class="toggle btn" on-click="startCount" disabled$="{{isRunning}}">Start</button>
+    <div class="buttons" visible$="[[showButtons]]">
+      <button class="toggle btn" on-click="startCount" disabled$="[[isRunning]]">Start</button>
       <button class="toggle btn" on-click="stopCount">Stop</button>
       <button class="reset btn" on-click="resetCount">Reset</button>
     </div>
@@ -91,28 +92,28 @@ A flip clock, timer and countdown made with Polymer
 <script>
   Polymer({
     is: 'flip-clock',
+    time: '000000',
+    timer: null,
 
     properties: {
-      time: {
-        value: '000000'
-      },
-      timer: {
-        value: null
-      },
       displayMode: {
         type: String
       },
-      commandButtons: {
+      showButtons: {
         type: Boolean,
         value: false
       },
-      showSeconds: {
+      hideSeconds: {
         type: Boolean,
-        value: true
+        value: false
       },
       startFrom: {
         type: Number,
         value: null
+      },
+      auto: {
+        type: Boolean,
+        value: false
       }
     },
     /**
