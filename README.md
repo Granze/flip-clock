@@ -25,8 +25,8 @@ Install using [Bower](http://bower.io):
 | Attribute    | Type    | Default   | Description                         |
 |--------------|---------|-----------|-------------------------------------|
 | `displayMode`       | string  |    clock       | Display the element as clock, timer or countdown    |
-| `commandButtons`         | boolean  | false | Display start/stop and reset buttons |
-| `showSeconds` | boolean | true     | Show or hide seconds         |
+| `showButtons`         | boolean  | false | Display start/stop and reset buttons |
+| `hideSeconds` | boolean | false     | Show or hide seconds         |
 | `startFrom` | int | null     | Set the minutes to start from for the countdown mode    |
 | `auto`   | boolean | false     | Auto start timer and/or countdown            |
 

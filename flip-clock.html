@@ -10,198 +10,196 @@ A flip clock, timer and countdown made with Polymer
 
 @element flip-clock
 @blurb A flip clock, timer and countdown made with Polymer
-@status alpha
+@status beta
 @homepage http://Granze.github.io/flip-clock
+@author Maurizio Mangione
+
 -->
-<polymer-element name="flip-clock" attributes="displayMode commandButtons showSeconds startFrom auto">
-
+<dom-module id="flip-clock">
+  <style>
+    :host {
+      display: block;
+    }
+    #clock {
+      font-size: 0;
+      font-family: Arial, Verdana, sans-serif;
+      font-weight: bold;
+    }
+    #clock * {
+      font-size: 70px;
+    }
+    #clock .num {
+      position: relative;
+      display: inline-block;
+      margin-right: 10px;
+      padding: 5px 15px;
+      border-radius: 4px;
+      color: #fff;
+      box-shadow: 1px 1px 1px #555;
+      background-color: #333;
+      background: -webkit-linear-gradient(top, #333 0%, #444 50%, #333 51%, #222 100%);
+      background: linear-gradient(to bottom, #333 0%,#444 50%,#333 51%,#222 100%);
+    }
+    #clock .num:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 100%;
+      height: 3px;
+      background-color: #111;
+    }
+    #clock b {
+      color: #333;
+      margin-right: 10px;
+    }
+    .btn {
+      margin: 20px 10px 10px 10px;
+      padding: 5px 10px;
+      border: 1px solid #000;
+      border-radius: 2px;
+      cursor: pointer;
+      color: #dedede;
+      background-color: #333;
+    }
+    .btn[disabled] {
+      opacity: .5;
+    }
+    [hidden], .buttons {
+      display: none;
+    }
+    .buttons[visible] {
+      display: block;
+    }
+  </style>
   <template>
+    <div id="clock">
+      <span class="num" id="hours0">[[time.0]]</span><span class="num" id="hours1">[[time.1]]</span>
+      <b>:</b><span class="num" id="minutes0">[[time.2]]</span><span class="num" id="minutes1">[[time.3]]</span>
+      <span hidden$="[[hideSeconds]]">
+        <b>:</b><span class="num" id="seconds0">[[time.4]]</span><span class="num" id="seconds1">[[time.5]]</span>
+      </span>
 
-    <link rel="stylesheet" href="flip-clock.css" />
-
-      <div id="clock">
-        <span id="hours0">{{time[0]}}</span><span id="hours1">{{time[1]}}</span>
-        <b>:</b>
-        <span id="minutes0">{{time[2]}}</span><span id="minutes1">{{time[3]}}</span>
-
-        <template if="{{showSeconds}}">
-          <b>:</b>
-          <span id="seconds0">{{time[4]}}</span><span id="seconds1">{{time[5]}}</span>
-        </template>
-
-      </div>
-
-      <template if="{{commandButtons && displayMode !== 'clock'}}">
-        <button class="toggle btn" on-click="{{startCount}}" disabled?="{{isRunning}}">Start</button>
-        <button class="toggle btn" on-click="{{stopCount}}">Stop</button>
-        <button class="reset btn" on-click="{{resetCount}}">Reset</button>
-      </template>
-
+    </div>
+    <div class="buttons" visible$="[[showButtons]]">
+      <button class="toggle btn" on-click="startCount" disabled$="[[isRunning]]">Start</button>
+      <button class="toggle btn" on-click="stopCount">Stop</button>
+      <button class="reset btn" on-click="resetCount">Reset</button>
+    </div>
   </template>
+</dom-module>
 
-  <script>
+<script>
+  Polymer({
+    is: 'flip-clock',
+    time: '000000',
+    timer: null,
 
-    Polymer('flip-clock', {
-      /**
-       * The `displayMode` attribute determine the kind of clock to display.
-       *
-       * @attribute displayMode
-       * @type string
-       * @default clock
-       * @options clock, countdown, timer
-       */
-      displayMode: 'clock',
-
-      /**
-       * Display start/stop and reset buttons
-       *
-       * @attribute commandButtons
-       * @type boolean
-       */
-      commandButtons: false,
-
-      /**
-       * Show or hide seconds
-       *
-       * @attribute showSeconds
-       * @type boolean
-       * @default true
-       */
-      showSeconds: true,
-
-      /**
-       * Set the minutes to start from for the countdown mode
-       *
-       * @attribute startFrom
-       * @type int
-       * @default null
-       */
-      startFrom: null,
-
-      /**
-       * String containing the digits displayed in the flip clock
-       *
-       * @attribute time
-       * @type string
-       * @default '000000'
-       */
-      time: '000000',
-
-      /**
-       * Set the hours, minutes and seconds in the timer
-       *
-       * @attribute timer
-       * @type string
-       */
-      timer: null,
-
-      /**
-       * Auto start timer and/or countdown
-       *
-       * @attribute auto
-       * @type boolean
-       */
-      auto: false,
-
-      /**
-       * Track if the timer (or the countdown) is running or not
-       *
-       * @attribute isRunning
-       * @type boolean
-       */
-      isRunning: false,
-
-      /**
-       * The `createClock` method start a clock that display the current time.
-       *
-       * @method createClock
-       */
-      createClock: function() {
-        this.time = moment().format('HHmmss');
-        this.async(this.createClock, null, 1000);
+    properties: {
+      displayMode: {
+        type: String
       },
-
-      /**
-       * The `createTimer` method create a timer
-       *
-       * @method createTimer
-       */
-      createTimer: function() {
-        if(this.isRunning) {
-          this.time = this.timer.add(1, 's').format('HHmmss');
-          this.async(this.createTimer, null, 1000);
-        }
+      showButtons: {
+        type: Boolean,
+        value: false
       },
-
-      /**
-       * The `createCountdown` method create a countdown
-       *
-       * @method createCountdown
-       */
-      createCountdown: function() {
-        if(this.isRunning) {
-          if(this.time > 0) {
-            this.time = this.timer.subtract(1, 's').format('HHmmss');
-            this.async(this.createCountdown, null, 1000);
-          }
-        }
+      hideSeconds: {
+        type: Boolean,
+        value: false
       },
-      /**
-       * The `startCount` method does no work at this time.
-       *
-       * @method startCount
-       */
-      startCount: function() {
-        if(!this.timer) {
-          this.timer = moment().hours(0).minutes(this.startFrom || 0).seconds(0);
-        }
-        this.isRunning = true;
-        this.startFrom ? this.createCountdown() : this.createTimer();
+      startFrom: {
+        type: Number,
+        value: null
       },
-
-      /**
-       * The `stopCount` stop the running timer or countdown
-       *
-       * @method stopCount
-       */
-      stopCount: function() {
-        this.isRunning = false;
-      },
-
-      /**
-       * The `resetCount` reset che counter
-       *
-       * @method resetCount
-       */
-      resetCount: function() {
-        this.isRunning = false;
-        this.time = this.startFrom ? '00' + this.startFrom + '00' : '000000';
-        this.timer = null;
-      },
-      created: function() {
-        this.resetCount();
-      },
-      ready: function() {
-        switch(this.displayMode) {
-          case 'timer':
-            if(this.auto === true) {
-              this.startCount();
-            }
-            break;
-          case 'countdown':
-            if(this.auto === true) {
-              this.createCountdown();
-            }
-            break;
-          default:
-            this.createClock();
-        }
-        if(this.startFrom) {
-          this.time = '00' + this.startFrom + '00';
+      auto: {
+        type: Boolean,
+        value: false
+      }
+    },
+    /**
+     * The `createClock` method start a clock that display the current time.
+     *
+     * @method createClock
+     */
+    createClock: function() {
+      this.time = moment().format('HHmmss');
+      this.async(this.createClock, 1000);
+    },
+    /**
+     * The `createTimer` method create a timer
+     *
+     * @method createTimer
+     */
+    createTimer: function() {
+      if(this.isRunning) {
+        this.time = this.timer.add(1, 's').format('HHmmss');
+        this.async(this.createTimer, 1000);
+      }
+    },
+    /**
+     * The `createCountdown` method create a countdown
+     *
+     * @method createCountdown
+     */
+    createCountdown: function() {
+      if(this.isRunning) {
+        if(this.time > 0) {
+          this.time = this.timer.subtract(1, 's').format('HHmmss');
+          this.async(this.createCountdown, 1000);
         }
       }
-    });
+    },
+    /**
+     * The `startCount` method starts the timer or the countdown
+     *
+     * @method startCount
+     */
+    startCount: function() {
+      if(!this.timer) {
+        this.timer = moment().hours(0).minutes(this.startFrom || 0).seconds(0);
+      }
+      this.isRunning = true;
+      this.startFrom ? this.createCountdown() : this.createTimer();
+    },
+    /**
+     * The `stopCount` stop the running timer or countdown
+     *
+     * @method stopCount
+     */
+    stopCount: function() {
+      this.isRunning = false;
+    },
+    /**
+     * The `resetCount` reset che counter
+     *
+     * @method resetCount
+     */
+    resetCount: function() {
+      this.isRunning = false;
+      this.time = this.startFrom ? '00' + this.startFrom + '00' : '000000';
+      this.timer = null;
+    },
 
-  </script>
+    ready: function() {
+      this.resetCount();
 
-</polymer-element>
+      switch(this.displayMode) {
+        case 'timer':
+          if(this.auto === true) {
+            this.startCount();
+          }
+          break;
+        case 'countdown':
+          if(this.auto === true) {
+            this.createCountdown();
+          }
+          break;
+        default:
+          this.createClock();
+      }
+      if(this.startFrom) {
+        this.time = '00' + this.startFrom + '00';
+      }
+    }
+  });
+</script>

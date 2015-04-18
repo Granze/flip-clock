@@ -1,14 +1,14 @@
 {
   "name": "flip-clock",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "keywords": [
     "polymer",
     "web-components"
   ],
   "main": "flip-clock.html",
   "dependencies": {
-    "moment": "~2.8.3",
-    "polymer": "~0.5.1"
+    "moment": "~2.10.0",
+    "polymer": "~0.8.0"
   },
   "homepage": "https://github.com/Granze/flip-clock",
   "authors": [
@@ -23,5 +23,9 @@
     "../",
     "test",
     "tests"
-  ]
+  ],
+  "resolutions": {
+    "webcomponentsjs": "^0.6.0",
+    "polymer": "0.8.0-rc.4"
+  }
 }
