@@ -5,17 +5,21 @@
 <!--
 A flip clock, timer and countdown made with Polymer
 
-##### Example
+##### Examples
 
     <flip-clock></flip-clock>
 
+    <flip-clock display-mode="timer" show-buttons></flip-clock>
+
+    <flip-clock display-mode="countdown" start-from="20" show-buttons></flip-clock>
+
 @element flip-clock
 @blurb A flip clock, timer and countdown made with Polymer
-@status beta
 @homepage http://Granze.github.io/flip-clock
 @author Maurizio Mangione
 
 -->
+
 <dom-module id="flip-clock">
   <style>
     :host {
@@ -97,21 +101,57 @@ A flip clock, timer and countdown made with Polymer
     timer: null,
 
     properties: {
+      /**
+       * Set the flip clock mode. Possible values are 'timer' and 'countdown'.
+       * A clock will be displayed if no value is specified.
+       *
+       * @attribute displayMode
+       * @type String
+       * @dafault
+       */
       displayMode: {
         type: String
       },
+      /**
+       * Show the command buttons to start, stop and reset a timer or a countdown
+       *
+       * @attribute showButtons
+       * @type Boolean
+       * @default false
+       */
       showButtons: {
         type: Boolean,
         value: false
       },
+      /**
+       * Hide the seconds digits in the counter, timer and countdown
+       *
+       * @attribute hideSeconds
+       * @type Boolean
+       * @default false
+       */
       hideSeconds: {
         type: Boolean,
         value: false
       },
+      /**
+       * Starting minutes for the countdown
+       *
+       * @attribute startFrom
+       * @type Number
+       * @value null
+       */
       startFrom: {
         type: Number,
         value: null
       },
+      /**
+       * Auto start the timer and/or the countdown
+       *
+       * @attribute auto
+       * @type Boolean
+       * @value false
+       */
       auto: {
         type: Boolean,
         value: false
