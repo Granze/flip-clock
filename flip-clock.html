@@ -97,7 +97,15 @@ A flip clock, timer and countdown made with Polymer
 <script>
   Polymer({
     is: 'flip-clock',
+    /***
+     * @private
+     * @type String
+     * @default '000000'
+     */
     time: '000000',
+    /***
+     * @private
+     */
     timer: null,
 
     properties: {
@@ -107,7 +115,7 @@ A flip clock, timer and countdown made with Polymer
        *
        * @attribute displayMode
        * @type String
-       * @dafault
+       * @default
        */
       displayMode: {
         type: String

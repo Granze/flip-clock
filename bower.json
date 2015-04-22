@@ -8,7 +8,11 @@
   "main": "flip-clock.html",
   "dependencies": {
     "moment": "~2.10.0",
-    "polymer": "~0.8.0"
+    "polymer": "Polymer/polymer#v0.8.0-rc.6"
+  },
+  "devDependencies": {
+    "iron-doc-viewer": "PolymerElements/iron-doc-viewer#^0.8.6",
+    "web-component-tester": "*"
   },
   "homepage": "https://github.com/Granze/flip-clock",
   "authors": [
@@ -23,9 +27,5 @@
     "../",
     "test",
     "tests"
-  ],
-  "resolutions": {
-    "webcomponentsjs": "^0.6.0",
-    "polymer": "0.8.0-rc.4"
-  }
+  ]
 }
