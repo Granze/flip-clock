@@ -1,0 +1,50 @@
+!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="../../webcomponentsjs/webcomponents.min.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+  <link rel="import" href="../flip-clock.html">
+</head>
+<body>
+<flip-clock id="clock"></flip-clock>
+<flip-clock id="timer" display-mode="timer"></flip-clock>
+<flip-clock id="countdown" start-from="20" display-mode="countdown"></flip-clock>
+<script>
+  describe('<flip-clock>', function() {
+    context('common tests', function () {
+
+      it('should not display the command buttons', function () {
+        var el = document.getElementById('clock');
+        expect(el.showButtons).to.be.equal(false);
+      });
+
+      it('should display the command buttons', function () {
+        var el = document.getElementById('clock');
+        el.setAttribute('show-buttons', 'true');
+        expect(el.showButtons).to.be.equal(true);
+      });
+
+    });
+
+    context('clock mode', function () {
+
+    });
+
+    context('timer mode', function () {
+      it('should start at "000000"', function () {
+        var el = document.getElementById('timer');
+        expect(el.time).to.equal('000000');
+      });
+    });
+
+    context('countdown mode', function () {
+      it('should start from 20 minutes', function () {
+        var el = document.getElementById('countdown');
+        expect(el.time).to.be.equal('002000')
+      });
+    });
+  });
+</script>
+</body>
+</html>
