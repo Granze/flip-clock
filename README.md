@@ -20,6 +20,16 @@ Install using [Bower](http://bower.io):
  bower install flip-clock
 ```
 
+##test
+
+Install [web-component-tester](https://github.com/Polymer/web-component-tester) globally
+
+```shell
+ npm install -g web-component-tester
+```
+
+cd in the flip-clock folder and run ```wct```. That's it!
+
 ## Options
 
 | Attribute    | Type    | Default   | Description                         |
