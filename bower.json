@@ -1,6 +1,6 @@
 {
   "name": "flip-clock",
-  "version": "0.0.5",
+  "version": "1.0.0",
   "keywords": [
     "polymer",
     "web-components"
@@ -8,7 +8,7 @@
   "main": "flip-clock.html",
   "dependencies": {
     "moment": "~2.10.0",
-    "polymer": "Polymer/polymer#^0.9.0"
+    "polymer": "Polymer/polymer#^1.0.0"
   },
   "devDependencies": {
     "iron-doc-viewer": "PolymerElements/iron-doc-viewer#^0.9.0"
