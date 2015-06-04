@@ -10,7 +10,7 @@ See the [component page](http://Granze.github.io/flip-clock) for more informatio
 
 ## Demo
 
-> [Check it live](http://granze.github.io/flip-clock/components/flip-clock/demo.html).
+> [Check it live](http://granze.github.io/flip-clock/components/flip-clock/demo).
 
 ## Installation
 
