@@ -86,9 +86,9 @@ A flip clock, timer and countdown made with Polymer
 
     </div>
     <div class="buttons" visible$="[[showButtons]]">
-      <button class="toggle btn" on-click="startCount" disabled$="[[isRunning]]">Start</button>
-      <button class="toggle btn" on-click="stopCount">Stop</button>
-      <button class="reset btn" on-click="resetCount">Reset</button>
+      <button class="toggle btn" on-click="_startCount" disabled$="[[isRunning]]">Start</button>
+      <button class="toggle btn" on-click="_stopCount">Stop</button>
+      <button class="reset btn" on-click="_resetCount">Reset</button>
     </div>
   </template>
 </dom-module>
@@ -104,6 +104,7 @@ A flip clock, timer and countdown made with Polymer
     time: '000000',
     /***
      * @private
+     * @default null
      */
     timer: null,
 
@@ -146,7 +147,7 @@ A flip clock, timer and countdown made with Polymer
        *
        * @attribute startFrom
        * @type Number
-       * @value null
+       * @default null
        */
       startFrom: {
         type: Number,
@@ -157,7 +158,7 @@ A flip clock, timer and countdown made with Polymer
        *
        * @attribute auto
        * @type Boolean
-       * @value false
+       * @default false
        */
       auto: {
         type: Boolean,
@@ -165,85 +166,91 @@ A flip clock, timer and countdown made with Polymer
       }
     },
     /**
-     * The `createClock` method start a clock that display the current time.
+     * The `_createClock` method start a clock that display the current time.
      *
-     * @method createClock
+     * @method _createClock
+     * @private
      */
-    createClock: function() {
+    _createClock: function() {
       this.time = moment().format('HHmmss');
-      this.async(this.createClock, 1000);
+      this.async(this._createClock, 1000);
     },
     /**
-     * The `createTimer` method create a timer
+     * The `_createTimer` method create a timer
      *
-     * @method createTimer
+     * @method _createTimer
+     * @private
      */
-    createTimer: function() {
+    _createTimer: function() {
       if(this.isRunning) {
         this.time = this.timer.add(1, 's').format('HHmmss');
-        this.async(this.createTimer, 1000);
+        this.async(this._createTimer, 1000);
       }
     },
     /**
-     * The `createCountdown` method create a countdown
+     * The `_createCountdown` method create a countdown
      *
-     * @method createCountdown
+     * @method _createCountdown
+     * @private
      */
-    createCountdown: function() {
+    _createCountdown: function() {
       if(this.isRunning) {
         if(this.time > 0) {
           this.time = this.timer.subtract(1, 's').format('HHmmss');
-          this.async(this.createCountdown, 1000);
+          this.async(this._createCountdown, 1000);
         }
       }
     },
     /**
-     * The `startCount` method starts the timer or the countdown
+     * The `_startCount` method starts the timer or the countdown
      *
-     * @method startCount
+     * @method _startCount
+     * @private
      */
-    startCount: function() {
+    _startCount: function() {
       if(!this.timer) {
         this.timer = moment().hours(0).minutes(this.startFrom || 0).seconds(0);
       }
       this.isRunning = true;
-      this.startFrom ? this.createCountdown() : this.createTimer();
+      this.startFrom ? this._createCountdown() : this._createTimer();
     },
     /**
-     * The `stopCount` stop the running timer or countdown
+     * The `_stopCount` stop the running timer or countdown
      *
-     * @method stopCount
+     * @method _stopCount
+     * @private
      */
-    stopCount: function() {
+    _stopCount: function() {
       this.isRunning = false;
     },
     /**
-     * The `resetCount` reset che counter
+     * The `_resetCount` reset che counter
      *
-     * @method resetCount
+     * @method _resetCount
+     * @private
      */
-    resetCount: function() {
+    _resetCount: function() {
       this.isRunning = false;
       this.time = this.startFrom ? '00' + this.startFrom + '00' : '000000';
       this.timer = null;
     },
 
     ready: function() {
-      this.resetCount();
+      this._resetCount();
 
       switch(this.displayMode) {
         case 'timer':
           if(this.auto === true) {
-            this.startCount();
+            this._startCount();
           }
           break;
         case 'countdown':
           if(this.auto === true) {
-            this.createCountdown();
+            this._createCountdown();
           }
           break;
         default:
-          this.createClock();
+          this._createClock();
       }
       if(this.startFrom) {
         this.time = '00' + this.startFrom + '00';
