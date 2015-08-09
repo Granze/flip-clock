@@ -34,10 +34,11 @@ cd in the flip-clock folder and run ```wct```. That's it!
 
 | Attribute    | Type    | Default   | Description                         |
 |--------------|---------|-----------|-------------------------------------|
-| `displayMode`       | string  |    clock       | Display the element as clock, timer or countdown    |
-| `showButtons`         | boolean  | false | Display start/stop and reset buttons |
-| `hideSeconds` | boolean | false     | Show or hide seconds         |
-| `startFrom` | int | null     | Set the minutes to start from for the countdown mode    |
+| `display-mode`       | string  |    clock       | Display the element as clock, timer or countdown    |
+| `show-buttons`         | boolean  | false | Display start/stop and reset buttons |
+| `hide-hours` | boolean | false     | Show or hide hours         |
+| `hide-seconds` | boolean | false     | Show or hide seconds         |
+| `start-from` | int | null     | Set the minutes to start from for the countdown mode    |
 | `auto`   | boolean | false     | Auto start timer and/or countdown            |
 
 ## License

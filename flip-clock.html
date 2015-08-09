@@ -78,8 +78,10 @@ A flip clock, timer and countdown made with Polymer
   </style>
   <template>
     <div id="clock">
-      <span class="num" id="hours0">[[time.0]]</span><span class="num" id="hours1">[[time.1]]</span>
-      <b>:</b><span class="num" id="minutes0">[[time.2]]</span><span class="num" id="minutes1">[[time.3]]</span>
+      <span hidden$="[[hideHours]]">
+        <span class="num" id="hours0">[[time.0]]</span><span class="num" id="hours1">[[time.1]]</span><b>:</b>
+      </span>
+      <span class="num" id="minutes0">[[time.2]]</span><span class="num" id="minutes1">[[time.3]]</span>
       <span hidden$="[[hideSeconds]]">
         <b>:</b><span class="num" id="seconds0">[[time.4]]</span><span class="num" id="seconds1">[[time.5]]</span>
       </span>
@@ -128,6 +130,17 @@ A flip clock, timer and countdown made with Polymer
        * @default false
        */
       showButtons: {
+        type: Boolean,
+        value: false
+      },
+      /**
+       * Hide the hour digits in the counter, timer and countdown
+       *
+       * @attribute hideHours
+       * @type Boolean
+       * @default false
+       */
+      hideHours: {
         type: Boolean,
         value: false
       },
