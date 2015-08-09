@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Granze/flip-clock.svg)](https://travis-ci.org/Granze/flip-clock)
+
 # &lt;flip-clock&gt;
 
 A flip clock, timer and countdown made with [Polymer](http://polymer-project.org) and [Moment.js](https://github.com/moment/momentjs.com)
