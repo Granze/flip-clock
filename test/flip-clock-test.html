@@ -17,12 +17,14 @@
       it('should not display the command buttons', function () {
         var el = document.getElementById('clock');
         expect(el.showButtons).to.be.equal(false);
+        expect(el.querySelector('.buttons').offsetHeight).to.be.equal(0);
       });
 
       it('should display the command buttons', function () {
         var el = document.getElementById('clock');
         el.setAttribute('show-buttons', 'true');
         expect(el.showButtons).to.be.equal(true);
+        expect(el.querySelector('.buttons').offsetHeight).to.be.gt(0);
       });
 
     });
