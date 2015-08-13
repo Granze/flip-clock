@@ -2,51 +2,72 @@
 <html>
 <head>
   <meta charset="utf-8">
+
   <script src="../../webcomponentsjs/webcomponents.min.js"></script>
   <script src="../../web-component-tester/browser.js"></script>
+  <script src="../../test-fixture/test-fixture-mocha.js"></script>
+
   <link rel="import" href="../flip-clock.html">
+  <link rel="import" href="../../test-fixture/test-fixture.html">
+
 </head>
 <body>
-<flip-clock id="clock"></flip-clock>
-<flip-clock id="timer" display-mode="timer"></flip-clock>
-<flip-clock id="countdown" start-from="20" display-mode="countdown"></flip-clock>
-<script>
-  describe('<flip-clock>', function() {
-    context('common tests', function () {
 
-      it('should not display the command buttons', function () {
-        var el = document.getElementById('clock');
-        expect(el.showButtons).to.be.equal(false);
-        expect(el.querySelector('.buttons').offsetHeight).to.be.equal(0);
+  <test-fixture id="clock">
+    <template>
+      <flip-clock></flip-clock>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="timer">
+    <template>
+      <flip-clock display-mode="timer"></flip-clock>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="countdown">
+    <template>
+      <flip-clock start-from="20" display-mode="countdown"></flip-clock>
+    </template>
+  </test-fixture>
+
+  <script>
+    describe('<flip-clock>', function() {
+      var clock, timer, countdown;
+
+      before(function() {
+        clock = fixture('clock');
+        timer = fixture('timer');
+        countdown = fixture('countdown');
       });
 
-      it('should display the command buttons', function () {
-        var el = document.getElementById('clock');
-        el.setAttribute('show-buttons', 'true');
-        expect(el.showButtons).to.be.equal(true);
-        expect(el.querySelector('.buttons').offsetHeight).to.be.gt(0);
+      context('common tests', function() {
+
+        it('should not display the command buttons', function() {
+          expect(clock.showButtons).to.be.equal(false);
+          expect(clock.querySelector('.buttons').offsetHeight).to.be.equal(0);
+        });
+
+        it('should display the command buttons', function() {
+          clock.setAttribute('show-buttons', 'true');
+          expect(clock.showButtons).to.be.equal(true);
+          expect(clock.querySelector('.buttons').offsetHeight).to.be.gt(0);
+        });
+
       });
 
-    });
+      context('timer mode', function() {
+        it('should start at "000000"', function() {
+          expect(timer.time).to.equal('000000');
+        });
+      });
 
-    context('clock mode', function () {
-
-    });
-
-    context('timer mode', function () {
-      it('should start at "000000"', function () {
-        var el = document.getElementById('timer');
-        expect(el.time).to.equal('000000');
+      context('countdown mode', function() {
+        it('should start from 20 minutes', function() {
+          expect(countdown.time).to.be.equal('002000')
+        });
       });
     });
-
-    context('countdown mode', function () {
-      it('should start from 20 minutes', function () {
-        var el = document.getElementById('countdown');
-        expect(el.time).to.be.equal('002000')
-      });
-    });
-  });
-</script>
+  </script>
 </body>
 </html>
