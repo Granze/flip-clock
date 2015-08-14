@@ -35,7 +35,7 @@
     describe('<flip-clock>', function() {
       var clock, timer, countdown;
 
-      before(function() {
+      beforeEach(function() {
         clock = fixture('clock');
         timer = fixture('timer');
         countdown = fixture('countdown');
@@ -43,15 +43,15 @@
 
       context('common tests', function() {
 
-        it('should not display the command buttons', function() {
-          expect(clock.showButtons).to.be.equal(false);
-          expect(clock.querySelector('.buttons').offsetHeight).to.be.equal(0);
-        });
-
         it('should display the command buttons', function() {
           clock.setAttribute('show-buttons', 'true');
           expect(clock.showButtons).to.be.equal(true);
-          expect(clock.querySelector('.buttons').offsetHeight).to.be.gt(0);
+          expect(clock.querySelector('.buttons').attributes).to.have.ownProperty('visible');
+        });
+
+        it('should not display the command buttons', function() {
+          expect(clock.showButtons).to.be.equal(false);
+          expect(clock.querySelector('.buttons').attributes).to.not.have.ownProperty('visible');
         });
 
       });
