@@ -30,17 +30,6 @@ Install [web-component-tester](https://github.com/Polymer/web-component-tester) 
 
 cd in the flip-clock folder and run ```wct```. That's it!
 
-## Options
-
-| Attribute    | Type    | Default   | Description                         |
-|--------------|---------|-----------|-------------------------------------|
-| `display-mode`       | string  |    clock       | Display the element as clock, timer or countdown    |
-| `show-buttons`         | boolean  | false | Display start/stop and reset buttons |
-| `hide-hours` | boolean | false     | Show or hide hours         |
-| `hide-seconds` | boolean | false     | Show or hide seconds         |
-| `start-from` | int | null     | Set the minutes to start from for the countdown mode    |
-| `auto`   | boolean | false     | Auto start timer and/or countdown            |
-
 ## License
 
 [MIT License](http://opensource.org/licenses/MIT)
