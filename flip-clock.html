@@ -69,12 +69,6 @@ A flip clock, timer and countdown made with Polymer
     .btn[disabled] {
       opacity: .5;
     }
-    [hidden], .buttons {
-      display: none;
-    }
-    .buttons[visible] {
-      display: block;
-    }
   </style>
   <template>
     <div id="clock">
@@ -87,7 +81,7 @@ A flip clock, timer and countdown made with Polymer
       </span>
 
     </div>
-    <div class="buttons" visible$="[[showButtons]]">
+    <div class="buttons" hidden$="[[!showButtons]]">
       <button class="toggle btn" on-click="_startCount" disabled$="[[isRunning]]">Start</button>
       <button class="toggle btn" on-click="_stopCount">Stop</button>
       <button class="reset btn" on-click="_resetCount">Reset</button>
