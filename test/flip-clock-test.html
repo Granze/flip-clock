@@ -46,12 +46,12 @@
         it('should display the command buttons', function() {
           clock.setAttribute('show-buttons', 'true');
           expect(clock.showButtons).to.be.equal(true);
-          expect(clock.querySelector('.buttons').attributes).to.not.have.ownProperty('hidden');
+          expect(Polymer.dom(clock.root).querySelector('.buttons').attributes).to.not.have.ownProperty('hidden');
         });
 
         it('should not display the command buttons', function() {
           expect(clock.showButtons).to.be.equal(false);
-          expect(clock.querySelector('.buttons').attributes).to.have.ownProperty('hidden');
+          expect(Polymer.dom(clock.root).querySelector('.buttons').attributes).to.have.ownProperty('hidden');
         });
 
       });
