@@ -6,6 +6,7 @@
   <script src="../../webcomponentsjs/webcomponents.min.js"></script>
   <script src="../../web-component-tester/browser.js"></script>
   <script src="../../test-fixture/test-fixture-mocha.js"></script>
+  <script src="../../iron-test-helpers/mock-interactions.js"></script>
 
   <link rel="import" href="../flip-clock.html">
   <link rel="import" href="../../test-fixture/test-fixture.html">
@@ -33,16 +34,16 @@
 
   <script>
     describe('<flip-clock>', function() {
-      var clock, timer, countdown;
+      var clock, timer, countdown, startBtn;
 
       beforeEach(function() {
         clock = fixture('clock');
         timer = fixture('timer');
         countdown = fixture('countdown');
+        startBtn = Polymer.dom(timer.root).querySelector('.buttons button')
       });
 
       context('common tests', function() {
-
         it('should display the command buttons', function() {
           clock.setAttribute('show-buttons', 'true');
           expect(clock.showButtons).to.be.equal(true);
@@ -53,12 +54,19 @@
           expect(clock.showButtons).to.be.equal(false);
           expect(Polymer.dom(clock.root).querySelector('.buttons').attributes).to.have.ownProperty('hidden');
         });
-
       });
 
       context('timer mode', function() {
         it('should start at "000000"', function() {
           expect(timer.time).to.equal('000000');
+        });
+
+        it('should disable the start button after clicking on it', function(done) {
+          startBtn.addEventListener('click', function() {
+            done();
+          });
+          MockInteractions.tap(startBtn);
+          expect(startBtn.hasAttribute('disable')).to.be.equal(true);
         });
       });
 
