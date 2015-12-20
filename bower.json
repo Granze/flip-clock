@@ -11,8 +11,9 @@
     "polymer": "Polymer/polymer#^1.2.0"
   },
   "devDependencies": {
-    "iron-component-page": "PolymerElements/iron-component-page#~1.0.5",
-    "test-fixture": "polymerelements/test-fixture#^1.0.0"
+    "test-fixture": "polymerelements/test-fixture#^1.1.0",
+    "iron-test-helpers": "polymerelements/iron-test-helpers#~1.1.3",
+    "iron-component-page": "polymerelements/iron-component-page#~1.1.2"
   },
   "homepage": "https://github.com/Granze/flip-clock",
   "authors": [
