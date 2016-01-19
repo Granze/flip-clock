@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Granze/flip-clock.svg)](https://travis-ci.org/Granze/flip-clock)
+[![Build Status](https://travis-ci.org/Granze/flip-clock.svg?branch=master)](https://travis-ci.org/Granze/flip-clock)
 
 # &lt;flip-clock&gt;
 
