@@ -260,7 +260,7 @@ A flip clock, timer and countdown made with Polymer
           this._createClock();
       }
       if(this.startFrom) {
-        this.time = '00' + this.startFrom + '00';
+        this.time = '00' + ('00' + this.startFrom).slice(-2) + '00';
       }
     }
   });
