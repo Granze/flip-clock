@@ -245,20 +245,14 @@ A flip clock, timer and countdown made with Polymer
     ready: function() {
       this._resetCount();
 
-      switch(this.displayMode) {
-        case 'timer':
-          if(this.auto === true) {
-            this._startCount();
-          }
-          break;
-        case 'countdown':
-          if(this.auto === true) {
-            this._createCountdown();
-          }
-          break;
-        default:
-          this._createClock();
+      if(this.displayMode === 'timer' || this.displayMode === 'countdown') {
+        if(this.auto === true) {
+          this._startCount();
+        }
+      }  else {
+        this._createClock();
       }
+
       if(this.startFrom) {
         this.time = '00' + ('00' + this.startFrom).slice(-2) + '00';
       }
