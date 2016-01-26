@@ -3,6 +3,8 @@ node_js:
   - '4'
   - '5'
 before_install:
+  addons:
+    firefox: latest
   - 'npm install -g bower web-component-tester'
   - 'bower install'
   - 'export DISPLAY=:99.0'
