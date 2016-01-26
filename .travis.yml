@@ -1,10 +1,10 @@
 language: node_js
 node_js:
-  - '4'
-  - '5'
+  - '4.0.0'
+  - '5.0.0'
+addons:
+  firefox: latest
 before_install:
-  addons:
-    firefox: latest
   - 'npm install -g bower web-component-tester'
   - 'bower install'
   - 'export DISPLAY=:99.0'
