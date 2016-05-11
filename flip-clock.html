@@ -25,12 +25,9 @@ A flip clock, timer and countdown made with Polymer
       display: block;
     }
     #clock {
-      font-size: 0;
       font-family: Arial, Verdana, sans-serif;
       font-weight: bold;
-    }
-    #clock * {
-      font-size: 70px;
+      font-size: var(--digits-size, 70px);
     }
     #clock .num {
       position: relative;
@@ -38,11 +35,9 @@ A flip clock, timer and countdown made with Polymer
       margin-right: 10px;
       padding: 5px 15px;
       border-radius: 4px;
-      color: #fff;
-      box-shadow: 1px 1px 1px #555;
-      background-color: #333;
-      background: -webkit-linear-gradient(top, #333 0%, #444 50%, #333 51%, #222 100%);
-      background: linear-gradient(to bottom, #333 0%,#444 50%,#333 51%,#222 100%);
+      color: var(--digits-color, #fff);
+      box-shadow: var(--box-shadow, 1px 1px 1px #555);
+      background-color: var(--bg-color, #333);
     }
     #clock .num:after {
       content: '';
