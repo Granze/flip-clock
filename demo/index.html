@@ -5,7 +5,7 @@
   <title>flip-clock Demo</title>
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="../flip-clock.html">
-  <style>
+  <style is="custom-style">
     body {
       margin: 0;
       padding: 0;
@@ -43,6 +43,24 @@
       border-radius: 3px;
       padding: 2px 4px;
       color: #333;
+      white-space: pre;
+      text-align: left;
+    }
+
+
+    flip-clock.styled{
+      --digit-color: #FFEB3B;
+      --digit-bg-color: #2196F3;
+      --digit-size: 40px;
+      --digit-box-shadow: none;
+      --clock-digit: {
+        margin-right: 5px;
+      };
+      --digit-divider-color: #eee;
+      --divider-bar: {
+        height: 1px;
+      };
+
     }
   </style>
 </head>
@@ -63,6 +81,27 @@
     <h2>Countdown without hours</h2>
     <code>&lt;flip-clock display-mode=&quot;countdown&quot; start-from=&quot;20&quot; show-buttons hide-hours&gt;&lt;/flip-clock&gt;</code>
     <flip-clock display-mode="countdown" start-from="20" show-buttons hide-hours></flip-clock>
+
+    <h2>Custom Styling</h2>
+    <code>
+      &lt;style is="custom-style"&gt;
+      flip-clock.styled{
+        --digit-color: #FFEB3B;
+        --digit-bg-color: #2196F3;
+        --digit-size: 40px;
+        --digit-box-shadow: none;
+        --clock-digit: {
+          margin-right: 5px;
+        };
+        --digit-divider-color: #eee;
+        --divider-bar: {
+          height: 1px;
+        };
+      }
+      &lt;/style&gt;
+      &lt;flip-clock class="styled" display-mode="countdown" start-from="20" hide-hours&gt;&lt;/flip-clock&gt;
+    </code>
+    <flip-clock class="styled" display-mode="countdown" start-from="20" hide-hours></flip-clock>
   </div>
 </body>
 </html>
