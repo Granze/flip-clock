@@ -20,7 +20,7 @@ Install using [Bower](http://bower.io):
  bower install flip-clock
 ```
 
-##test
+## test
 
 Install [web-component-tester](https://github.com/Polymer/web-component-tester) globally
 
