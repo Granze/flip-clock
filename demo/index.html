@@ -1,68 +1,48 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-  <title>flip-clock Demo</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+  <title>flip-clock demo</title>
+
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
   <link rel="import" href="../flip-clock.html">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      color: #333;
-      background: #fff;
-    }
-    a {
-      color: #fff;
-    }
-    a:hover {
-      text-decoration: none;
-    }
-    h1 {
-      margin: 0 auto;
-      font-weight: normal;
-    }
-    h1 span {
-      font-size: 14px;
-    }
-    h2 {
-      font-size: 34px;
-      margin: 30px 0 10px;
-    }
-    .wrapper {
-      max-width: 960px;
-      margin: 20px auto 0 auto;
-      text-align: center;
-    }
-    code {
-      display: inline-block;
-      margin: 0 0 20px 0;
-      font-family: monospace , serif;
-      border: 1px solid #ddd;
-      background-color: #f8f8f8;
-      border-radius: 3px;
-      padding: 2px 4px;
-      color: #333;
-    }
-  </style>
+
+  <custom-style>
+    <style is="custom-style" include="demo-pages-shared-styles">
+    </style>
+  </custom-style>
 </head>
 <body>
-  <div class="wrapper">
-    <h2>Clock</h2>
-    <code>&lt;flip-clock&gt;&lt;/flip-clock&gt;</code>
-    <flip-clock></flip-clock>
-
-    <h2>Timer </h2>
-    <code>&lt;flip-clock display-mode=&quot;timer&quot; show-buttons&gt;&lt;/flip-clock&gt;</code>
-    <flip-clock display-mode="timer" show-buttons></flip-clock>
-
-    <h2>Countdown </h2>
-    <code>&lt;flip-clock display-mode=&quot;countdown&quot; start-from=&quot;20&quot; show-buttons&gt;&lt;/flip-clock&gt;</code>
-    <flip-clock display-mode="countdown" start-from="20" show-buttons></flip-clock>
-
-    <h2>Countdown without hours</h2>
-    <code>&lt;flip-clock display-mode=&quot;countdown&quot; start-from=&quot;20&quot; show-buttons hide-hours&gt;&lt;/flip-clock&gt;</code>
-    <flip-clock display-mode="countdown" start-from="20" show-buttons hide-hours></flip-clock>
-  </div>
+<div class="vertical-section-container centered">
+  <h3>Basic flip-clock</h3>
+  <demo-snippet>
+    <template>
+      <flip-clock></flip-clock>
+    </template>
+  </demo-snippet>
+  <h3>Timer flip-clock</h3>
+  <demo-snippet>
+    <template>
+      <flip-clock display-mode="timer" show-buttons></flip-clock>
+    </template>
+  </demo-snippet>
+  <h3>Countdown flip-clock</h3>
+  <demo-snippet>
+    <template>
+      <flip-clock display-mode="countdown" start-from="20" show-buttons></flip-clock>
+    </template>
+  </demo-snippet>
+  <h3>Countdown without hours flip-clock</h3>
+  <demo-snippet>
+    <template>
+      <flip-clock display-mode="countdown" start-from="20" show-buttons hide-hours></flip-clock>
+    </template>
+  </demo-snippet>
+</div>
 </body>
 </html>
