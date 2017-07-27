@@ -1,12 +1,16 @@
 language: node_js
-node_js:
-  - '4.0.0'
-  - '5.0.0'
+node_js: stable
+dist: trusty
+sudo: required
 addons:
   firefox: latest
-before_install:
-  - 'npm install -g bower web-component-tester'
-  - 'bower install'
-  - 'export DISPLAY=:99.0'
-  - 'sh -e /etc/init.d/xvfb start'
-script: 'wct'
+  apt:
+    sources:
+    - google-chrome
+    packages:
+    - google-chrome-stable
+before_script:
+- npm install -g bower polylint web-component-tester
+- bower install
+- polylint
+script: xvfb-run wct

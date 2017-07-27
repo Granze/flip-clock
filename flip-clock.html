@@ -1,71 +1,53 @@
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="moment-import.html">
 
-<!--
-A flip clock, timer and countdown made with Polymer
-
-##### Examples
-
-    <flip-clock></flip-clock>
-
-    <flip-clock display-mode="timer" show-buttons></flip-clock>
-
-    <flip-clock display-mode="countdown" start-from="20" show-buttons></flip-clock>
-
-@demo
-@element flip-clock
-@homepage http://Granze.github.io/flip-clock
-@author Maurizio Mangione
-
--->
-
 <dom-module id="flip-clock">
-  <style>
-    :host {
-      display: block;
-    }
-    #clock {
-      font-family: Arial, Verdana, sans-serif;
-      font-weight: bold;
-      font-size: var(--digits-size, 70px);
-    }
-    #clock .num {
-      position: relative;
-      display: inline-block;
-      margin-right: 10px;
-      padding: 5px 15px;
-      border-radius: 4px;
-      color: var(--digits-color, #fff);
-      box-shadow: var(--box-shadow, 1px 1px 1px #555);
-      background-color: var(--bg-color, #333);
-    }
-    #clock .num:after {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 50%;
-      width: 100%;
-      height: 3px;
-      background-color: #111;
-    }
-    #clock b {
-      color: #333;
-      margin-right: 10px;
-    }
-    .btn {
-      margin: 20px 10px 10px 10px;
-      padding: 5px 10px;
-      border: 1px solid #000;
-      border-radius: 2px;
-      cursor: pointer;
-      color: #dedede;
-      background-color: #333;
-    }
-    .btn[disabled] {
-      opacity: .5;
-    }
-  </style>
   <template>
+    <style>
+      :host {
+        display: block;
+      }
+      #clock {
+        font-family: Arial, Verdana, sans-serif;
+        font-weight: bold;
+        font-size: var(--digits-size, 70px);
+      }
+      #clock .num {
+        position: relative;
+        display: inline-block;
+        margin-right: 10px;
+        padding: 5px 15px;
+        border-radius: 4px;
+        color: var(--digits-color, #fff);
+        box-shadow: var(--box-shadow, 1px 1px 1px #555);
+        background-color: var(--bg-color, #333);
+      }
+      #clock .num:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 100%;
+        height: 3px;
+        background-color: #111;
+      }
+      #clock b {
+        color: #333;
+        margin-right: 10px;
+      }
+      .btn {
+        margin: 20px 10px 10px 10px;
+        padding: 5px 10px;
+        border: 1px solid #000;
+        border-radius: 2px;
+        cursor: pointer;
+        color: #dedede;
+        background-color: #333;
+      }
+      .btn[disabled] {
+        opacity: .5;
+      }
+    </style>
     <div id="clock">
       <span hidden$="[[hideHours]]">
         <span class="num" id="hours0">[[time.0]]</span><span class="num" id="hours1">[[time.1]]</span><b>:</b>
@@ -82,181 +64,105 @@ A flip clock, timer and countdown made with Polymer
       <button class="reset btn" on-click="_resetCount">Reset</button>
     </div>
   </template>
-</dom-module>
 
-<script>
-  Polymer({
-    is: 'flip-clock',
-    /***
-     * @private
-     * @type String
-     * @default '000000'
+  <script>
+    /**
+     * `flip-clock`
+     *
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
      */
-    time: '000000',
-    /***
-     * @private
-     * @default null
-     */
-    timer: null,
-    /***
-     * @private
-     * @type Boolean
-     * @default false
-     */
-    isRunning: false,
-
-    properties: {
-      /**
-       * Set the flip clock mode. Possible values are 'timer' and 'countdown'.
-       * A clock will be displayed if no value is specified.
-       *
-       * @attribute displayMode
-       * @type String
-       * @default
-       */
-      displayMode: {
-        type: String
-      },
-      /**
-       * Show the command buttons to start, stop and reset a timer or a countdown
-       *
-       * @attribute showButtons
-       * @type Boolean
-       * @default false
-       */
-      showButtons: {
-        type: Boolean,
-        value: false
-      },
-      /**
-       * Hide the hour digits in the counter, timer and countdown
-       *
-       * @attribute hideHours
-       * @type Boolean
-       * @default false
-       */
-      hideHours: {
-        type: Boolean,
-        value: false
-      },
-      /**
-       * Hide the seconds digits in the counter, timer and countdown
-       *
-       * @attribute hideSeconds
-       * @type Boolean
-       * @default false
-       */
-      hideSeconds: {
-        type: Boolean,
-        value: false
-      },
-      /**
-       * Starting minutes for the countdown
-       *
-       * @attribute startFrom
-       * @type Number
-       * @default null
-       */
-      startFrom: {
-        type: Number,
-        value: null
-      },
-      /**
-       * Auto start the timer and/or the countdown
-       *
-       * @attribute auto
-       * @type Boolean
-       * @default false
-       */
-      auto: {
-        type: Boolean,
-        value: false
+    class FlipClock extends Polymer.Element {
+      static get is() { return 'flip-clock'; }
+      static get properties() {
+        return {
+          displayMode: {
+            type: String
+          },
+          showButtons: {
+            type: Boolean,
+            value: false
+          },
+          hideHours: {
+            type: Boolean,
+            value: false
+          },
+          hideSeconds: {
+            type: Boolean,
+            value: false
+          },
+          startFrom: {
+            type: Number,
+            value: null
+          },
+          auto: {
+            type: Boolean,
+            value: false
+          },
+          isRunning: {
+            type: Boolean,
+            value: false
+          }
+        };
       }
-    },
-    /**
-     * The `_createClock` method start a clock that display the current time.
-     *
-     * @method _createClock
-     * @private
-     */
-    _createClock: function() {
-      this.time = moment().format('HHmmss');
-      this.async(this._createClock, 1000);
-    },
-    /**
-     * The `_createTimer` method create a timer
-     *
-     * @method _createTimer
-     * @private
-     */
-    _createTimer: function() {
-      if(this.isRunning) {
-        this.time = this.timer.add(1, 's').format('HHmmss');
-        this.async(this._createTimer, 1000);
+      constructor() {
+        super();
+        this.time = '000000';
+        this.timer = null;
       }
-    },
-    /**
-     * The `_createCountdown` method create a countdown
-     *
-     * @method _createCountdown
-     * @private
-     */
-    _createCountdown: function() {
-      if(this.isRunning) {
-        if(this.time > 0) {
-          this.time = this.timer.subtract(1, 's').format('HHmmss');
-          this.async(this._createCountdown, 1000);
+      _createClock() {
+        this.time = moment().format('HHmmss');
+        setTimeout(() => this._createClock(), 1000);
+      }
+      _createTimer() {
+        if(this.isRunning) {
+          this.time = this.timer.add(1, 's').format('HHmmss');
+          setTimeout(() => this._createTimer(), 1000);
         }
       }
-    },
-    /**
-     * The `_startCount` method starts the timer or the countdown
-     *
-     * @method _startCount
-     * @private
-     */
-    _startCount: function() {
-      if(!this.timer) {
-        this.timer = moment().hours(0).minutes(this.startFrom || 0).seconds(0);
-      }
-      this.isRunning = true;
-      this.startFrom ? this._createCountdown() : this._createTimer();
-    },
-    /**
-     * The `_stopCount` stop the running timer or countdown
-     *
-     * @method _stopCount
-     * @private
-     */
-    _stopCount: function() {
-      this.isRunning = false;
-    },
-    /**
-     * The `_resetCount` reset che counter
-     *
-     * @method _resetCount
-     * @private
-     */
-    _resetCount: function() {
-      this.isRunning = false;
-      this.time = this.startFrom ? '00' + this.startFrom + '00' : '000000';
-      this.timer = null;
-    },
-
-    ready: function() {
-      this._resetCount();
-
-      if(this.displayMode === 'timer' || this.displayMode === 'countdown') {
-        if(this.auto === true) {
-          this._startCount();
+      _createCountdown() {
+        if(this.isRunning) {
+          if(this.time > 0) {
+            this.time = this.timer.subtract(1, 's').format('HHmmss');
+            setTimeout(() => this._createCountdown(), 1000);
+          }
         }
-      }  else {
-        this._createClock();
       }
+      _startCount() {
+        if(!this.timer) {
+          this.timer = moment().hours(0).minutes(this.startFrom || 0).seconds(0);
+        }
+        this.isRunning = true;
+        this.startFrom ? this._createCountdown() : this._createTimer();
+      }
+      _stopCount() {
+        this.isRunning = false;
+      }
+      _resetCount() {
+        this.isRunning = false;
+        this.time = this.startFrom ? '00' + this.startFrom + '00' : '000000';
+        this.timer = null;
+      }
+      ready() {
+        super.ready();
+        this._resetCount();
 
-      if(this.startFrom) {
-        this.time = '00' + ('00' + this.startFrom).slice(-2) + '00';
+        if(this.displayMode === 'timer' || this.displayMode === 'countdown') {
+          if(this.auto === true) {
+            this._startCount();
+          }
+        }  else {
+          this._createClock();
+        }
+
+        if(this.startFrom) {
+          this.time = '00' + ('00' + this.startFrom).slice(-2) + '00';
+        }
       }
     }
-  });
-</script>
+
+    window.customElements.define(FlipClock.is, FlipClock);
+  </script>
+</dom-module>
