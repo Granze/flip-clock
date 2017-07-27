@@ -7,7 +7,6 @@
   <script src="../../web-component-tester/browser.js"></script>
 
   <link rel="import" href="../flip-clock.html">
-  <link rel="import" href="../../test-fixture/test-fixture.html">
 
 </head>
 <body>
@@ -31,47 +30,44 @@
   </test-fixture>
 
   <script>
-    describe('<flip-clock>', function() {
-      var clock, timer, countdown, startBtn;
+    suite('<flip-clock>', function() {
+      var clock, clockShadowRoot, timer, timerShadowRoot, countdown, countdownShadowRoot, startBtn;
 
-      beforeEach(function() {
+      setup(function() {
         clock = fixture('clock');
+        clockShadowRoot = clock.shadowRoot;
         timer = fixture('timer');
+        timerShadowRoot = timer.shadowRoot;
         countdown = fixture('countdown');
-        startBtn = Polymer.dom(timer.root).querySelector('.buttons button')
+        countdownShadowRoot = countdown.shadowRoot;
+        startBtn = timerShadowRoot.querySelector('.buttons button');
       });
 
-      context('common tests', function() {
-        it('should display the command buttons', function() {
-          clock.setAttribute('show-buttons', 'true');
-          expect(clock.showButtons).to.be.equal(true);
-          expect(Polymer.dom(clock.root).querySelector('.buttons').attributes).to.not.have.ownProperty('hidden');
-        });
-
-        it('should not display the command buttons', function() {
-          expect(clock.showButtons).to.be.equal(false);
-          expect(Polymer.dom(clock.root).querySelector('.buttons').attributes).to.have.ownProperty('hidden');
-        });
+      test('should display the command buttons', function() {
+        clock.setAttribute('show-buttons', 'true');
+        assert.isTrue(clock.showButtons);
+        assert.isFalse(clockShadowRoot.querySelector('.buttons').hasAttribute('hidden'));
       });
 
-      context('timer mode', function() {
-        it('should start at "000000"', function() {
-          expect(timer.time).to.equal('000000');
-        });
-
-        it('should disable the start button after clicking on it', function(done) {
-          startBtn.addEventListener('click', function() {
-            done();
-          });
-          MockInteractions.tap(startBtn);
-          expect(startBtn.hasAttribute('disabled')).to.be.equal(true);
-        });
+      test('should not display the command buttons', function() {
+        assert.isFalse(clock.showButtons);
+        expect(clockShadowRoot.querySelector('.buttons').hasAttribute('hidden'));
       });
 
-      context('countdown mode', function() {
-        it('should start from 20 minutes', function() {
-          expect(countdown.time).to.be.equal('002000')
+      test('should start at "000000"', function() {
+        assert.equal(timer.time, '000000');
+      });
+
+      test('should disable the start button after clicking on it', function(done) {
+        startBtn.addEventListener('click', function() {
+          done();
         });
+        startBtn.click();
+        assert.isTrue(startBtn.hasAttribute('disabled'));
+      });
+
+      test('should start from 20 minutes', function() {
+        assert.equal(countdown.time, '002000');
       });
     });
   </script>
