@@ -4,13 +4,22 @@
 
 A flip clock, timer and countdown made with [Polymer](http://polymer-project.org) and [Moment.js](https://github.com/moment/momentjs.com)
 
-## Documentation and Demo
+## Demo
 
-See the [component page](http://Granze.github.io/flip-clock) for more information.
-
-## Screenshot 
-
-![Flip Clock](http://i.imgur.com/r5RBxL1.png)
+<!---
+```
+<custom-element-demo>
+  <template>
+    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="flip-clock.html">
+    <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+-->
+```html
+<flip-clock>...</flip-clock>
+```
 
 ## Installation
 
@@ -19,16 +28,6 @@ Install using [Bower](http://bower.io):
 ```shell
  bower install flip-clock
 ```
-
-##test
-
-Install [web-component-tester](https://github.com/Polymer/web-component-tester) globally
-
-```shell
- npm install -g web-component-tester
-```
-
-cd in the flip-clock folder and run ```wct```. That's it!
 
 ## License
 
