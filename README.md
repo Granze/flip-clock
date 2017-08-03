@@ -6,6 +6,7 @@
 A flip clock, timer and countdown made with [Polymer](http://polymer-project.org) and [Moment.js](https://github.com/moment/momentjs.com)
 
 ## Demo
+Full demo [here](https://www.webcomponents.org/element/granze/flip-clock/demo/demo/index.html)
 
 <!---
 ```
