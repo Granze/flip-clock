@@ -3,7 +3,7 @@
 
 # &lt;flip-clock&gt;
 
-A flip clock, timer and countdown made with [Polymer](http://polymer-project.org) and [Moment.js](https://github.com/moment/momentjs.com)
+A flip clock, timer and countdown made with [Polymer](http://polymer-project.org) V3 and [Moment.js](https://github.com/moment/momentjs.com)
 
 ## Demo
 Full demo [here](https://www.webcomponents.org/element/granze/flip-clock/demo/demo/index.html)
@@ -25,11 +25,7 @@ Full demo [here](https://www.webcomponents.org/element/granze/flip-clock/demo/de
 
 ## Installation
 
-Install using [Bower](http://bower.io):
-
-```shell
- bower install flip-clock
-```
+TODO
 
 ## License
 
