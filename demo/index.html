@@ -6,11 +6,11 @@
 
   <title>flip-clock demo</title>
 
-  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <!--<script src="../../webcomponentsjs/webcomponents-lite.js"></script>-->
+  <script src="../bundle.js"></script>
 
-  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-  <link rel="import" href="../flip-clock.html">
+  <!--<link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">-->
+  <!--<link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
 
   <custom-style>
     <style is="custom-style" include="demo-pages-shared-styles">
@@ -20,34 +20,41 @@
     .centered {
       max-width: 620px;
     }
-  </style>
+  </style>-->
 </head>
 <body>
 <div class="vertical-section-container centered">
   <h3>Basic flip-clock</h3>
-  <demo-snippet>
-    <template>
-      <flip-clock></flip-clock>
-    </template>
-  </demo-snippet>
+  <flip-clock></flip-clock>
   <h3>Timer flip-clock</h3>
-  <demo-snippet>
-    <template>
-      <flip-clock display-mode="timer" show-buttons></flip-clock>
-    </template>
-  </demo-snippet>
+  <flip-clock display-mode="timer" show-buttons></flip-clock>
   <h3>Countdown flip-clock</h3>
-  <demo-snippet>
-    <template>
-      <flip-clock display-mode="countdown" start-from="20" show-buttons></flip-clock>
-    </template>
-  </demo-snippet>
-  <h3>Countdown without hours flip-clock</h3>
-  <demo-snippet>
-    <template>
-      <flip-clock display-mode="countdown" start-from="20" show-buttons hide-hours></flip-clock>
-    </template>
-  </demo-snippet>
+  <flip-clock display-mode="countdown" start-from="20" show-buttons></flip-clock>
+
+
+  <!--<demo-snippet>-->
+    <!--<template>-->
+      <!--<flip-clock></flip-clock>-->
+    <!--</template>-->
+  <!--</demo-snippet>-->
+  <!--<h3>Timer flip-clock</h3>-->
+  <!--<demo-snippet>-->
+    <!--<template>-->
+      <!--<flip-clock display-mode="timer" show-buttons></flip-clock>-->
+    <!--</template>-->
+  <!--</demo-snippet>-->
+  <!--<h3>Countdown flip-clock</h3>-->
+  <!--<demo-snippet>-->
+    <!--<template>-->
+      <!--<flip-clock display-mode="countdown" start-from="20" show-buttons></flip-clock>-->
+    <!--</template>-->
+  <!--</demo-snippet>-->
+  <!--<h3>Countdown without hours flip-clock</h3>-->
+  <!--<demo-snippet>-->
+    <!--<template>-->
+      <!--<flip-clock display-mode="countdown" start-from="20" show-buttons hide-hours></flip-clock>-->
+    <!--</template>-->
+  <!--</demo-snippet>-->
 </div>
 </body>
 </html>

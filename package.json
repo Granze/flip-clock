@@ -1,0 +1,26 @@
+{
+  "name": "flip-clock",
+  "version": "3.0.0",
+  "description": "A flip clock, timer and countdown made with Polymer",
+  "main": "index.js",
+  "repository": "github:/Granze/flip-clock.git",
+  "author": "Maurizio Mangione <granzebru@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack --config webpack.config.js -w",
+    "prettier": "prettier --single-quote --write src/flip-clock.js"
+  },
+  "dependencies": {
+    "@polymer/polymer": "next",
+    "moment": "^2.18.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^6.4.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-plugin-transform-custom-element-classes": "^0.1.0",
+    "babel-plugin-transform-es2015-classes": "^6.24.1",
+    "prettier": "^1.5.3",
+    "webpack": "^2.3.3"
+  }
+}
