@@ -142,7 +142,7 @@
       }
       _resetCount() {
         this.isRunning = false;
-        this.time = this.startFrom ? '00' + this.startFrom + '00' : '000000';
+        this.time = (this.startFrom && this.startFrom >= 0) ? '00' + ('00' + this.startFrom).slice(-2) + '00' : '000000';
         this.timer = null;
       }
       ready() {
@@ -157,7 +157,7 @@
           this._createClock();
         }
 
-        if(this.startFrom) {
+        if(this.startFrom && this.startFrom >= 0) {
           this.time = '00' + ('00' + this.startFrom).slice(-2) + '00';
         }
       }
