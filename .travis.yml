@@ -6,11 +6,11 @@ addons:
   firefox: latest
   apt:
     sources:
-    - google-chrome
+      - google-chrome
     packages:
-    - google-chrome-stable
+      - google-chrome-stable
 before_script:
-- npm install -g bower polylint web-component-tester
-- bower install
-- polylint
-script: xvfb-run wct
+  - npm install -g polylint web-component-tester
+  - polylint
+script: xvfb-run wct --module-resolution=node --npm
+

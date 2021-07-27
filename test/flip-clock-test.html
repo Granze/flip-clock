@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
 
-  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-  <script src="../../web-component-tester/browser.js"></script>
+  <script src="../../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+  <script src="../../../wct-browser-legacy/browser.js"></script>
 
-  <link rel="import" href="../flip-clock.html">
+  <script type="module" src="../flip-clock.js"></script>
 
 </head>
 <body>
@@ -29,47 +29,48 @@
     </template>
   </test-fixture>
 
-  <script>
-    suite('<flip-clock>', function() {
-      var clock, clockShadowRoot, timer, timerShadowRoot, countdown, countdownShadowRoot, startBtn;
+  <script type="module">
+import '../flip-clock.js';
+suite('<flip-clock>', function() {
+  var clock, clockShadowRoot, timer, timerShadowRoot, countdown, countdownShadowRoot, startBtn;
 
-      setup(function() {
-        clock = fixture('clock');
-        clockShadowRoot = clock.shadowRoot;
-        timer = fixture('timer');
-        timerShadowRoot = timer.shadowRoot;
-        countdown = fixture('countdown');
-        countdownShadowRoot = countdown.shadowRoot;
-        startBtn = timerShadowRoot.querySelector('.buttons button');
-      });
+  setup(function() {
+    clock = fixture('clock');
+    clockShadowRoot = clock.shadowRoot;
+    timer = fixture('timer');
+    timerShadowRoot = timer.shadowRoot;
+    countdown = fixture('countdown');
+    countdownShadowRoot = countdown.shadowRoot;
+    startBtn = timerShadowRoot.querySelector('.buttons button');
+  });
 
-      test('should display the command buttons', function() {
-        clock.setAttribute('show-buttons', 'true');
-        assert.isTrue(clock.showButtons);
-        assert.isFalse(clockShadowRoot.querySelector('.buttons').hasAttribute('hidden'));
-      });
+  test('should display the command buttons', function() {
+    clock.setAttribute('show-buttons', 'true');
+    assert.isTrue(clock.showButtons);
+    assert.isFalse(clockShadowRoot.querySelector('.buttons').hasAttribute('hidden'));
+  });
 
-      test('should not display the command buttons', function() {
-        assert.isFalse(clock.showButtons);
-        expect(clockShadowRoot.querySelector('.buttons').hasAttribute('hidden'));
-      });
+  test('should not display the command buttons', function() {
+    assert.isFalse(clock.showButtons);
+    expect(clockShadowRoot.querySelector('.buttons').hasAttribute('hidden'));
+  });
 
-      test('should start at "000000"', function() {
-        assert.equal(timer.time, '000000');
-      });
+  test('should start at "000000"', function() {
+    assert.equal(timer.time, '000000');
+  });
 
-      test('should disable the start button after clicking on it', function(done) {
-        startBtn.addEventListener('click', function() {
-          done();
-        });
-        startBtn.click();
-        assert.isTrue(startBtn.hasAttribute('disabled'));
-      });
-
-      test('should start from 20 minutes', function() {
-        assert.equal(countdown.time, '002000');
-      });
+  test('should disable the start button after clicking on it', function(done) {
+    startBtn.addEventListener('click', function() {
+      done();
     });
-  </script>
+    startBtn.click();
+    assert.isTrue(startBtn.hasAttribute('disabled'));
+  });
+
+  test('should start from 20 minutes', function() {
+    assert.equal(countdown.time, '002000');
+  });
+});
+</script>
 </body>
 </html>
